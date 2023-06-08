@@ -9,7 +9,7 @@ export function addItem(item:Item) {
   return axios.post('http://localhost:8080/cart',item)
 }
 
-export function updateItem(id:number,itemUpdate:number) {
+export function updateItem(id:number,itemUpdate: { quantity: number }) {
   return axios.patch(`http://localhost:8080/cart/${id}`,itemUpdate)
 }
 
