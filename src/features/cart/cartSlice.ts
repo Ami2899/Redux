@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchItems, addItem,  updateItem, deleteItem  } from './cartAPI';
-import { RootState } from '../../app/store';
+import { RootState } from '../../store';
 
 export interface Item {
   id: string;
@@ -8,9 +8,7 @@ export interface Item {
   brand: string;
   thumbnail: string;
   price: number;
-  change:string;
-  quantity:number;
-  description: string;
+  quantity: number;
 }
 
 export interface CartState{
@@ -52,7 +50,7 @@ export const deleteAsync = createAsyncThunk(
 export const updateAsync = createAsyncThunk(
   'cart/updateItem',
   async ({ id, change }: { id: number; change: { quantity: number } }) => {
-    const response = await updateItem(id, change);
+    const response = await updateItem(id, change.quantity);
     return response.data;
   }
 );

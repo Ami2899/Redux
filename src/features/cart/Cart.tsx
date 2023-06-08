@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '../../store';
 import './Cart.css'
-import { deleteAsync , fetchAsync, updateAsync} from './cartSlice';
-import { AnyAction } from '@reduxjs/toolkit';
+import { deleteAsync , updateAsync} from './cartSlice';
 
 export function Cart() {
   const items=useSelector((state:RootState)=>state.cart.items)
   const dispatch = useDispatch();
-  
-  useEffect(()=>{
-    dispatch(fetchAsync() as any)
-  },[])
   
   const handleChange=(e: React.ChangeEvent<HTMLSelectElement>, id: number)=>{
     console.log(e.target.value)
@@ -41,7 +36,6 @@ export function Cart() {
           </select>
         </div>
         <div className='close'>
-          {/* <button onClick={()=>dispatch(deleteAsync(item.id) as any)}>X</button> */}
           <button onClick={() => dispatch(deleteAsync(item.id) as any)}>X</button>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {fetchAsync} from './productSlice';
 import { addAsync } from '../cart/cartSlice';
 import './Product.css'
-import { RootState } from '../../app/store';
+import { RootState } from '../../store';
 import { Item } from '../cart/cartSlice';
 
 interface Product extends Item {
@@ -21,8 +21,11 @@ export function Products() {
   },[])
   
   const handleAddToCart = (product: Product) => {
-    dispatch(addAsync(product) as any);
+    const { id, title, brand, thumbnail, price } = product;
+    const item = { id, title, brand, thumbnail, price, quantity: 1 };
+    dispatch(addAsync(item) as any);
   };
+
   return (
     <div>
       <div>
@@ -33,7 +36,7 @@ export function Products() {
             <p className="price">${product.price}</p>
             <p>{product.description}</p>
             <p>
-              <button onClick={()=>handleAddToCart(product)}>Add to Cart</button>
+              <button onClick={()=>handleAddToCart({ ...product, change: 'some value' })}>Add to Cart</button>
             </p>
           </div>
         ))}
